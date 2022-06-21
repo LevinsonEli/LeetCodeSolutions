@@ -19,11 +19,11 @@ var addTwoNumbers = function (l1, l2) {
     if (l1) {
       sum += l1.val;
       l1 = l1.next;
-    } else l1 = null;
+    }
     if (l2) {
       sum += l2.val;
       l2 = l2.next;
-    } else l2 = null;
+    }
     curr.next = new ListNode(sum % 10);
     curr = curr.next;
     sum = sum > 9;
