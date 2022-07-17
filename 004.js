@@ -7,29 +7,27 @@ var findMedianSortedArrays = function(nums1, nums2) {
     if (nums1.length > nums2.length)
         return findMedianSortedArrays(nums2, nums1);
 
-    let   start   = 0,
-          end     = nums1.length;
+    let start = 0;
+    let end   = nums1.length;
 
     while (start <= end) {
-        const partitionX = Math.floor((start + end) / 2),
-              partitionY = Math.floor((nums1.length + nums2.length + 1) / 2) - partitionX,
-              maxLeftX   = (partitionX === 0) ? Number.NEGATIVE_INFINITY : nums1[partitionX - 1],
-              maxLeftY   = (partitionY === 0) ? Number.NEGATIVE_INFINITY : nums2[partitionY - 1],
-              minRightX  = (partitionX === nums1.length) ? Number.POSITIVE_INFINITY : nums1[partitionX],
-              minRightY  = (partitionY === nums2.length) ? Number.POSITIVE_INFINITY : nums2[partitionY];
+        const partitionNums1 = Math.floor((start + end) / 2),
+              partitionNums2 = Math.floor((nums1.length + nums2.length + 1) / 2) - partitionNums1,
+              maxLeftNums1   = (partitionNums1 === 0) ? Number.NEGATIVE_INFINITY : nums1[partitionNums1 - 1],
+              maxLeftNums2   = (partitionNums2 === 0) ? Number.NEGATIVE_INFINITY : nums2[partitionNums2 - 1],
+              minRightNums1  = (partitionNums1 === nums1.length) ? Number.POSITIVE_INFINITY : nums1[partitionNums1],
+              minRightNumsY  = (partitionNums2 === nums2.length) ? Number.POSITIVE_INFINITY : nums2[partitionNums2];
 
-        if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+        if (maxLeftNums1 <= minRightNumsY && maxLeftNums2 <= minRightNums1) {
             if ((nums1.length + nums2.length) % 2 === 0)
-                return (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2;
+                return (Math.max(maxLeftNums1, maxLeftNums2) + Math.min(minRightNums1, minRightNumsY)) / 2;
             else
-                return Math.max(maxLeftX, maxLeftY);
-        } else if (maxLeftX > minRightY)
-            end = partitionX - 1;
+                return Math.max(maxLeftNums1, maxLeftNums2);
+        } else if (maxLeftNums1 > minRightNumsY)
+            end = partitionNums1 - 1;
         else
-            start = partitionX + 1;
+            start = partitionNums1 + 1;
     }
 
     return undefined;
 };
-
-console.log(Number.NEGATIVE_INFINITY = -1);
